@@ -1,4 +1,6 @@
-class DBManager {
+import {eventManager, appStartData, appPrefix, loginClose} from './variables'
+
+export class DBManager {
   constructor() {
     this.db = localStorage;
   }
@@ -19,9 +21,8 @@ class DBManager {
 
 }
 
-class AppManager {
+export class AppManager {
   constructor() {
-    this.appName = 'kerrat';
     this.currentStudentData = null;
     this.localDb = new DBManager();
     this.setStudentsRegister();
@@ -59,7 +60,7 @@ class AppManager {
   }
 }
 
-class Student {
+export class Student {
   constructor() {
     this.currentStudentDB = new DBManager();
   }
@@ -72,12 +73,12 @@ class Student {
 
 }
 
-class QuestionGenerator{
+export class QuestionGenerator{
   constructor(){
     this.firstNumber = null;
     this.secondNumber = null;
     this.result = null;
-    this.rendomMultipications() 
+    this.rendomMultipications()
   }
 
   rendomMultipications() {
