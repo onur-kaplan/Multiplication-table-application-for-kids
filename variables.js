@@ -1,38 +1,42 @@
-let eventManager = new Events();
-let introScoreList = document.querySelector(".intro-score-list");
-let loginClose = document.querySelector(".close");
-let loginBtn = document.querySelector('.login-button');
-let userNameInput = document.querySelector('#userName');
-let userPassInput = document.querySelector('#userPass');
-let logOutBtn = document.querySelector(".logout-btn");
-let loginCheckAlert = document.querySelector(".login-control-alert");
-let activeUserNameContainer = document.querySelector(".active-user-name");
-let activeUserScoreContainer = document.querySelector(".user-score");
-let quizContainer = document.querySelector(".quiz-container");
-let quizContainerHeading = document.querySelector(".quiz-container");
-let quizHeading = document.querySelector(".quiz-heading");
-let quizMainBox = document.querySelector(".quiz-main-box");
-let startQuiz = document.querySelector(".start-to-quiz");
-let quizGuessResult = document.querySelector(".quiz-guess-result");
-let quizNumberFirst = document.querySelector(".number-one");
-let quizNumberSecond = document.querySelector(".number-two");
-let quizGuessInput = document.querySelector(".quiz-guess");
-let timerBox = document.querySelector("#timer-box");
 
-  
-const appPrefix = {
+
+
+import Events from 'minivents';
+
+export let eventManager = new Events();
+export let introScoreList = document.querySelector(".intro-score-list");
+export let loginClose = document.querySelector(".close");
+export let loginBtn = document.querySelector('.login-button');
+export let userNameInput = document.querySelector('#userName');
+export let userPassInput = document.querySelector('#userPass');
+export let logOutBtn = document.querySelector(".logout-btn");
+export let loginCheckAlert = document.querySelector(".login-control-alert");
+export let activeUserNameContainer = document.querySelector(".active-user-name");
+export let activeUserScoreContainer = document.querySelector(".user-score");
+export let quizContainer = document.querySelector(".quiz-container");
+export let quizContainerHeading = document.querySelector(".quiz-container");
+export let quizHeading = document.querySelector(".quiz-heading");
+export let quizMainBox = document.querySelector(".quiz-main-box");
+export let startQuiz = document.querySelector(".start-to-quiz");
+export let quizGuessResult = document.querySelector(".quiz-guess-result");
+export let quizNumberFirst = document.querySelector(".number-one");
+export let quizNumberSecond = document.querySelector(".number-two");
+export let quizGuessInput = document.querySelector(".quiz-guess");
+export let timerBox = document.querySelector("#timer-box");
+
+
+export const appPrefix = {
     students: '__kerrat_students',
     currentStudent: "__kerrat_current_student",
 };
 
-const appStartData = [
+export const appStartData = [
   { userId: 1, userName: 'Mahmut', userPassword: '1234', userScore: 0 },
   { userId: 2, userName: 'Onur', userPassword: '2468', userScore: 0 },
   { userId: 3, userName: 'Batu', userPassword: '1357', userScore: 0 }
 ];
-  
-  
-let introListTemplate = `
+
+export let introListTemplate = `
 <div class="d-flex align-items-center justify-content-between py-2 border-bottom border-gray scoreboard-list-item">
   <div class="d-flex align-items-center">
     <img class="mr-2 rounded" src="img/user-__STUDENTICON__.svg" width="80" height="80">
@@ -48,7 +52,7 @@ let introListTemplate = `
 </div>
 `;
 
-let quizHeadingTemplate = `
+export let quizHeadingTemplate = `
 <div class="d-flex align-items-center justify-content-between border-bottom border-gray">
   <div class="d-flex align-items-center">
     <img alt="32x32" class="mr-2 rounded" src="img/user-__STUDENTICON__.svg" width="100" height="100">
@@ -63,3 +67,4 @@ let quizHeadingTemplate = `
   </h3>
 </div>
 `;
+
