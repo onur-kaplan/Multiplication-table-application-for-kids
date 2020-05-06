@@ -8,8 +8,8 @@
     "build": "rm -rf dist && parcel build index.html"
   },
   "dependencies": {
-    "minivents": "^2.2.0",
-    "yarn": "^1.22.4"
+    "firebase": "^7.14.2",
+    "minivents": "^2.2.0"
   },
   "staticFiles": {
     "staticPath": "src/assets",
