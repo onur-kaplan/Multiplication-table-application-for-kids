@@ -22,13 +22,13 @@ export class DBManager {
 }
 
 export class AppManager {
-  constructor() {
+  constructor(appStartData) {
     this.currentStudentData = null;
     this.localDb = new DBManager();
-    this.setStudentsRegister();
+    this.setStudentsRegister(appStartData);
   }
 
-  setStudentsRegister() {
+  setStudentsRegister(appStartData) {
     let initialData = appStartData;
     const allStudentsData = this.localDb.getItem(appPrefix.students);
     if(allStudentsData){
@@ -39,6 +39,7 @@ export class AppManager {
   }
 
   userCheck(n, p) {
+
     let registerUsers = this.localDb.getItem(appPrefix.students);
     return !!registerUsers.find(user => {
       return user.userName === n && user.userPassword === p;

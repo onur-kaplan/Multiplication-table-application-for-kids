@@ -8,6 +8,7 @@
     "build": "rm -rf dist && parcel build index.html"
   },
   "dependencies": {
+    "firebase": "^7.14.2",
     "minivents": "^2.2.0"
   },
   "staticFiles": {
