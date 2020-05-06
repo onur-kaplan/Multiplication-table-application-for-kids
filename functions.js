@@ -20,8 +20,8 @@ import {
 } from "./variables";
 import {DBManager, AppManager, QuestionGenerator, Student} from './classes';
 
-function firstStart() {
-    const manager = new AppManager();
+function firstStart(appStartData) {
+    const manager = new AppManager(appStartData);
     const introScoreData = manager.localDb.getItem(appPrefix.students);
     const scoreListSummary = introScoreData.reduce((carry, item) => {
         carry += introListTemplate
@@ -43,6 +43,8 @@ function firstStart() {
         manager.login(userNameValue, userPassValue)
         appReStart()
     });
+
+    appReStart();
 }
 
 function appReStart() {

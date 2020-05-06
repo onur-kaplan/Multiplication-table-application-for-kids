@@ -30,12 +30,6 @@ export const appPrefix = {
     currentStudent: "__kerrat_current_student",
 };
 
-export const appStartData = [
-  { userId: 1, userName: 'Mahmut', userPassword: '1234', userScore: 0 },
-  { userId: 2, userName: 'Onur', userPassword: '2468', userScore: 0 },
-  { userId: 3, userName: 'Batu', userPassword: '1357', userScore: 0 }
-];
-
 export let introListTemplate = `
 <div class="d-flex align-items-center justify-content-between py-2 border-bottom border-gray scoreboard-list-item">
   <div class="d-flex align-items-center">
