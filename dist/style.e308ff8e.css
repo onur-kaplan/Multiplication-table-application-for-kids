@@ -122,6 +122,11 @@ input[type="radio"]:checked+label{
     animation-fill-mode: both;
   }
   
-  
+  .userHistoryBtn{
+    display: block; text-align: right; font-size: 14px; color: #ccc; margin: 5px 0 0; text-decoration: underline; cursor: pointer;
+  }
+  .historyTable{ font-size: 12px;}
+  .historyTable .thead-dark th{color: #222; background-color: #ffc106; border-color: #ffc106;}
+  .historyTable tbody td{ text-align: center;}
 
 /*# sourceMappingURL=/style.e308ff8e.css.map */

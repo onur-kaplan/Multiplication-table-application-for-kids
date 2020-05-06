@@ -23,11 +23,14 @@ export let quizNumberFirst = document.querySelector(".number-one");
 export let quizNumberSecond = document.querySelector(".number-two");
 export let quizGuessInput = document.querySelector(".quiz-guess");
 export let timerBox = document.querySelector("#timer-box");
+export let userHistory = [];
+export let userHistoryContainer = document.querySelector('#userHistoryContainer');
 
 
 export const appPrefix = {
     students: '__kerrat_students',
     currentStudent: "__kerrat_current_student",
+    historyStudent: "__history_students"
 };
 
 export let introListTemplate = `
@@ -51,14 +54,28 @@ export let quizHeadingTemplate = `
   <div class="d-flex align-items-center">
     <img alt="32x32" class="mr-2 rounded" src="img/user-__STUDENTICON__.svg" width="100" height="100">
     <div class="media-body mb-0 small lh-125">
-      <div class="d-flex justify-content-between align-items-center w-100">
+      <div class="d-flex justify-content-between align-items-center w-100 flex-column">
         <h5 class="text-gray-dark active-user-name">__STUDENTNAME__</h5>
       </div>
     </div>
   </div>
   <h3 class="user-score-box">
       Toplam Puanın: <span class="user-score">__STUDENTSCORE__</span>  
+      <span class="userHistoryBtn" data-toggle="modal" data-target="#historyModal">Cevap Geçmişi</span>
   </h3>
 </div>
+`;
+
+
+export let historyStudentTemplate = `
+<tr>
+  <td>__NUMBERONE__</td>
+  <td>x</td>
+  <td>__NUMBERTWO__</td>
+  <td>=</td>
+  <td>__USERRESULT__</td>
+  <td>__TRUERESULT__</td>
+  <td>__RESULT__</td>
+</tr>
 `;
 

@@ -17,6 +17,9 @@ import {
     timerBox,
     userNameInput,
     userPassInput,
+    userHistory,
+    userHistoryContainer,
+    historyStudentTemplate
 } from "./variables";
 import {DBManager, AppManager, QuestionGenerator, Student} from './classes';
 
@@ -41,7 +44,8 @@ function firstStart(appStartData) {
         const userNameValue = userNameInput.value;
         const userPassValue = userPassInput.value;
         manager.login(userNameValue, userPassValue)
-        appReStart()
+        appReStart();
+        loadUserHistory();
     });
 
     appReStart();
@@ -60,7 +64,8 @@ function appReStart() {
         document.querySelector("body").classList.add("isLogin")
         return;
     }
-    document.querySelector("body").classList.remove("isLogin")
+    document.querySelector("body").classList.remove("isLogin");
+
 }
 
 function logOut() {
@@ -99,6 +104,7 @@ function timer(minute, second) {
                 } else {
                     clearInterval(timerFire);
                     eventManager.emit("checkQuizStatus");
+                    setUserHistoryData('Süre Bitti');
                 }
             }
         }
@@ -118,7 +124,53 @@ function QuizFinish() {
         return item;
     });
     dbManager.setItem(appPrefix.students, updatedAllUserData)
+
+    //UserHistoryDataSET
+    const getHistoryData= dbManager.getItem(appPrefix.historyStudent);
+    if(getHistoryData !== null) {
+        getHistoryData.map((item) => {
+            userHistory.push(item);
+        });
+    }
+    dbManager.setItem(appPrefix.historyStudent, userHistory);
+
     logOut()
+}
+
+function setUserHistoryData(userResult) {
+    
+    const dbManager = new DBManager();
+    const currentStuendData = dbManager.getItem(appPrefix.currentStudent);
+
+    userHistory.push({
+        userId: currentStuendData.userId,
+        numberOne: quizNumberFirst.innerHTML,
+        numberTwo: quizNumberSecond.innerHTML,
+        trueResult: generatedQuestion.result,
+        userResult: userResult
+    });
+
+}
+
+function loadUserHistory() {
+
+    const dbManager = new DBManager();
+    const historyStudent = dbManager.getItem(appPrefix.historyStudent);
+    const currentStuendData = dbManager.getItem(appPrefix.currentStudent);
+    let userId= currentStuendData.userId
+    let historyResult= "";
+    historyStudent.map((item) => {
+        if(item.userId === userId) {
+            historyResult += historyStudentTemplate 
+            .replace(/__NUMBERONE__/, item.numberOne)
+            .replace(/__NUMBERTWO__/, item.numberTwo)
+            .replace(/__USERRESULT__/, item.userResult)
+            .replace(/__TRUERESULT__/, item.trueResult)
+            .replace(/__RESULT__/, item.trueResult == item.userResult ? '<b>DOĞRU</b>' : 'YANLIŞ')
+        userHistoryContainer.innerHTML = historyResult;
+        }
+    });
+
 }
 
 // Events
@@ -148,6 +200,9 @@ quizGuessInput.addEventListener("change", function (e) {
         addClass = "alert-danger";
         removeClass = "alert-success";
     }
+
+    setUserHistoryData(e.target.value);
+
     quizGuessResult.innerHTML = message;
     quizGuessResult.classList.add(addClass);
     quizGuessResult.classList.remove(removeClass);
