@@ -1,7 +1,23 @@
-
-
-
 import Events from 'minivents';
+import { createStore } from 'redux';
+
+
+
+export const store = createStore(function(state, action){
+    switch (action.type) {
+        case 'setCurrentStudentsData':
+            return Object.assign({}, state, {
+                currentStudentsData: action.payload
+            });
+        case 'SCORE':
+
+            return Object.assign({}, state, {
+                score: state.score + 100
+            });
+        default:
+            return state
+    }
+});
 
 export let eventManager = new Events();
 export let introScoreList = document.querySelector(".intro-score-list");

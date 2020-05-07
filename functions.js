@@ -19,7 +19,8 @@ import {
     userPassInput,
     userHistory,
     userHistoryContainer,
-    historyStudentTemplate
+    historyStudentTemplate,
+    store
 } from "./variables";
 import {DBManager, AppManager, QuestionGenerator, Student} from './classes';
 
@@ -44,14 +45,30 @@ function firstStart(appStartData) {
         const userNameValue = userNameInput.value;
         const userPassValue = userPassInput.value;
         manager.login(userNameValue, userPassValue)
-        appReStart();
+        store.dispatch({type:"appRestart"});
         loadUserHistory();
     });
 
-    appReStart();
+    store.dispatch({type:"appRestart"});
 }
 
-function appReStart() {
+// function appReStart() {
+//     const manager = new DBManager();
+//     const introScoreData = manager.getItem(appPrefix.currentStudent);
+//     if (!!introScoreData) {
+//         const quizHeadingResult = quizHeadingTemplate
+//             .replace(/__STUDENTNAME__/, introScoreData.userName)
+//             .replace(/__STUDENTSCORE__/, introScoreData.userScore)
+//             .replace(/__STUDENTICON__/, introScoreData.userId)
+//         quizHeading.innerHTML = quizHeadingResult;
+//         document.querySelector("body").classList.add("isLogin")
+//         return;
+//     }
+//     document.querySelector("body").classList.remove("isLogin");
+// }
+
+store.subscribe(function() {
+    console.log(store.getState())
     const manager = new DBManager();
     const introScoreData = manager.getItem(appPrefix.currentStudent);
     if (!!introScoreData) {
@@ -60,13 +77,11 @@ function appReStart() {
             .replace(/__STUDENTSCORE__/, introScoreData.userScore)
             .replace(/__STUDENTICON__/, introScoreData.userId)
         quizHeading.innerHTML = quizHeadingResult;
-
         document.querySelector("body").classList.add("isLogin")
         return;
     }
     document.querySelector("body").classList.remove("isLogin");
-
-}
+});
 
 function logOut() {
     const removeCurrentData = new DBManager();
@@ -78,7 +93,7 @@ let quesstionCount = 10;
 let generatedQuestion = null;
 
 function newQuestion() {
-    appReStart()
+    store.dispatch({type:"appRestart"});
     clearInterval(timerFire)
     timer(0, 10);
     quesstionCount--;
@@ -91,7 +106,6 @@ let timerFire;
 
 function timer(minute, second) {
     timerFire = setInterval(contDown, 1000);
-
     function contDown() {
         if (document.hasFocus()) {
             second--;
@@ -112,7 +126,7 @@ function timer(minute, second) {
 }
 
 function QuizFinish() {
-    appReStart()
+    store.dispatch({type:"appRestart"});
     const dbManager = new DBManager();
     const currentStuendData = dbManager.getItem(appPrefix.currentStudent);
     const allStudentData = dbManager.getItem(appPrefix.students)
@@ -138,7 +152,7 @@ function QuizFinish() {
 }
 
 function setUserHistoryData(userResult) {
-    
+
     const dbManager = new DBManager();
     const currentStuendData = dbManager.getItem(appPrefix.currentStudent);
 
@@ -159,17 +173,17 @@ function loadUserHistory() {
     const currentStuendData = dbManager.getItem(appPrefix.currentStudent);
     let userId= currentStuendData.userId
     let historyResult= "";
-    historyStudent.map((item) => {
-        if(item.userId === userId) {
-            historyResult += historyStudentTemplate 
-            .replace(/__NUMBERONE__/, item.numberOne)
-            .replace(/__NUMBERTWO__/, item.numberTwo)
-            .replace(/__USERRESULT__/, item.userResult)
-            .replace(/__TRUERESULT__/, item.trueResult)
-            .replace(/__RESULT__/, item.trueResult == item.userResult ? '<b>DOĞRU</b>' : 'YANLIŞ')
-        userHistoryContainer.innerHTML = historyResult;
-        }
-    });
+    // historyStudent.map((item) => {
+    //     if(item.userId === userId) {
+    //         historyResult += historyStudentTemplate
+    //         .replace(/__NUMBERONE__/, item.numberOne)
+    //         .replace(/__NUMBERTWO__/, item.numberTwo)
+    //         .replace(/__USERRESULT__/, item.userResult)
+    //         .replace(/__TRUERESULT__/, item.trueResult)
+    //         .replace(/__RESULT__/, item.trueResult == item.userResult ? '<b>DOĞRU</b>' : 'YANLIŞ')
+    //     userHistoryContainer.innerHTML = historyResult;
+    //     }
+    // });
 
 }
 
@@ -223,4 +237,4 @@ eventManager.on("userLoginFailed", function () {
 })
 
 
-export {firstStart, appReStart}
+export {firstStart}
