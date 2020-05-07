@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "firebase": "^7.14.2",
-    "minivents": "^2.2.0"
+    "minivents": "^2.2.0",
+    "redux": "^4.0.5"
   },
   "staticFiles": {
     "staticPath": "src/assets",

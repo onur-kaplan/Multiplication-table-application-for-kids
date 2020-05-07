@@ -1,4 +1,5 @@
-import {eventManager, appStartData, appPrefix, loginClose} from './variables'
+import {eventManager, appStartData, appPrefix, loginClose} from './variables';
+import {store} from "./variables";
 
 export class DBManager {
   constructor() {
@@ -23,7 +24,6 @@ export class DBManager {
 
 export class AppManager {
   constructor(appStartData) {
-    this.currentStudentData = null;
     this.localDb = new DBManager();
     this.setStudentsRegister(appStartData);
   }
@@ -53,7 +53,7 @@ export class AppManager {
         return user.userName === userName;
       });
       this.localDb.setItem(appPrefix.currentStudent, currentStudentOldData);
-      this.currentStudentData = this.localDb.getItem(appPrefix.currentStudent);
+      store.dispatch({type:"setCurrentStudentsData", payload: currentStudentOldData});
       loginClose.click();
       return;
     }

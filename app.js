@@ -17,7 +17,6 @@ firebase.analytics();
 
 // Initialize Firebase
 return firebase.database().ref('/').once('value').then(function(snapshot) {
-    console.log(snapshot.val());
     firstStart(snapshot.val().users);
 });
 
