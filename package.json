@@ -6,7 +6,8 @@
   "scripts": {
     "start": "rm -rf dist && parcel index.html --open",
     "build": "rm -rf dist && parcel build index.html",
-    "eslint": "./node_modules/.bin/eslint *.js"
+    "eslint": "./node_modules/.bin/eslint *.js",
+    "test": "jest"
   },
   "dependencies": {
     "firebase": "^7.14.2",
@@ -18,11 +19,14 @@
     "watcherGlob": "**"
   },
   "devDependencies": {
-    "@babel/core": "7.2.0",
-    "parcel-bundler": "^1.6.1",
-    "parcel-plugin-static-files-copy": "^2.3.1",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "babel-jest": "^26.0.1",
     "eslint": "^7.0.0",
-    "eslint-config-google": "^0.14.0"
+    "eslint-config-google": "^0.14.0",
+    "jest": "^26.0.1",
+    "parcel-bundler": "^1.6.1",
+    "parcel-plugin-static-files-copy": "^2.3.1"
   },
   "eslintConfig": {
     "extends": "google",
@@ -31,7 +35,10 @@
       "sourceType": "module"
     },
     "rules": {
-      "max-len": ["error", 100]
+      "max-len": [
+        "error",
+        100
+      ]
     }
   },
   "keywords": [
