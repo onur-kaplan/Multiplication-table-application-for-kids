@@ -1,4 +1,5 @@
-import * as firebase from 'firebase';
+import firebase from 'firebase/app';
+import 'firebase/database';
 import {firstStart} from "./functions";
 
 const firebaseConfig = {
@@ -13,12 +14,8 @@ const firebaseConfig = {
 };
 
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
 
 // Initialize Firebase
-return firebase.database().ref('/').once('value').then(function(snapshot) {
+firebase.database().ref('/').once('value').then(function(snapshot) {
     firstStart(snapshot.val().users);
 });
-
-
-
