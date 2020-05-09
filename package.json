@@ -13,7 +13,7 @@
     "redux": "^4.0.5"
   },
   "staticFiles": {
-    "staticPath": "src/assets",
+    "staticPath": "statics/assets",
     "watcherGlob": "**"
   },
   "devDependencies": {
